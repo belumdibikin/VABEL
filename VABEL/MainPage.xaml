@@ -14,6 +14,9 @@
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">VABEL Video Ajar Berbasis E-Learning</x:String>
+        <CollectionViewSource
+                x:Key="menuSource"
+                Source="{Binding parents}"/>
     </Page.Resources>
 
     <!--
@@ -34,10 +37,26 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
-            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
+            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="VABEL" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-        <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="50" Margin="60,40,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="401"/>
-        <Button x:Name="searchButton" Content="Button" HorizontalAlignment="Left" Margin="475,40,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="75" Tapped="searchButton_Tapped"/>
+        <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="50" Margin="60,40,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="401"/>
+        <Button x:Name="searchButton" Content="Go" HorizontalAlignment="Left" Margin="475,40,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="75" Tapped="searchButton_Tapped"/>
+        <GridView x:Name="itemGridView"
+            AutomationProperties.AutomationId="ItemsGridView"
+            AutomationProperties.Name="Items"
+            TabIndex="1"
+            Grid.RowSpan="2"
+            ItemsSource="{Binding Source={StaticResource menuSource}}"
+            ItemTemplate="{StaticResource MainMenuTemplate}"
+            SelectionMode="None"
+            IsSwipeEnabled="True"
+            HorizontalAlignment="Left" 
+            Margin="60,130,0,0"
+            Grid.Row="1" 
+            VerticalAlignment="Top" 
+            Width="490" Height="498" 
+            IsItemClickEnabled="True"
+            ItemClick="GridView_ItemClick"/>
 
         <VisualStateManager.VisualStateGroups>
 

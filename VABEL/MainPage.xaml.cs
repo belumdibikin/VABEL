@@ -19,6 +19,17 @@ namespace VABEL
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
+    /// 
+    class parent{
+        public parent(string m){
+            this.mainParent = m;
+            this.icon = "";
+        }
+
+        public string mainParent { set; get; }
+        public string icon { set; get; }
+    }
+
     public sealed partial class MainPage : VABEL.Common.LayoutAwarePage
     {
         public MainPage()
@@ -37,6 +48,9 @@ namespace VABEL
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
+
+            List<parent> listMenu = new List<parent> { new parent("Topik"), new parent("Fakultas"), new parent("Bimbel"), new parent("Repositori") };
+            this.DefaultViewModel["parents"] = listMenu;
         }
 
         /// <summary>
@@ -47,6 +61,11 @@ namespace VABEL
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.Frame.Navigate(typeof(parentPage), ((parent)e.ClickedItem).mainParent);
         }
 
         private void searchButton_Tapped(object sender, TappedRoutedEventArgs e)
